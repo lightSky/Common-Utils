@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.kevinsawicki.wishlist;
+package com.it.xushuai.baseapp.util;
 
 import static android.graphics.Bitmap.Config.ARGB_8888;
 import static android.util.Log.DEBUG;
+
+import java.io.File;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import java.io.File;
 
 /**
  * Task to decode a bitmap from a file path

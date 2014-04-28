@@ -6,6 +6,8 @@ import android.content.SharedPreferences.Editor;
 
 public class PreferencesUtils {
 
+	
+	
     public static void setStringPreferences(Context context, String preference, String key, String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(preference, Context.MODE_PRIVATE);
         Editor editor = sharedPreferences.edit();

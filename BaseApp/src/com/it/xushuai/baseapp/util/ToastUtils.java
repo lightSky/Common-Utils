@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.mobile.util;
+package com.it.xushuai.baseapp.util;
 
 import android.app.Activity;
 import android.text.TextUtils;
 import android.widget.Toast;
-
-import com.github.kevinsawicki.wishlist.Toaster;
-
-import org.eclipse.egit.github.core.client.RequestException;
 
 /**
  * Utilities for displaying toast notifications
@@ -73,9 +69,9 @@ public class ToastUtils {
             return;
 
         String message;
-        if (e instanceof RequestException)
-            message = ((RequestException) e).formatErrors();
-        else
+//        if (e instanceof RequestException)
+//            message = ((RequestException) e).formatErrors();
+//        else
             message = null;
 
         if (TextUtils.isEmpty(message))
