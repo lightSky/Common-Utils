@@ -267,8 +267,6 @@ public class AppContext extends Application{
 		return memCacheRegion.get(key);
 	}
 	
-	
-	
 	/**
 	 * ≈–∂œª∫¥Ê «∑Ò¥Ê‘⁄
 	 * @param cachefile
