@@ -21,4 +21,6 @@
 	
     <color name="full_transparent">#00000000</color>
     <color name="half_transparent">#aa000000</color>
+    
+     <color name="text">#1E1E1E</color>
 </resources>
