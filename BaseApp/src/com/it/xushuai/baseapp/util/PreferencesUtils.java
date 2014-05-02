@@ -10,6 +10,12 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
 
+/**
+ * https://github.com/Pixplicity/EasyPreferences
+ * @author xushuai
+ * 2014-5-2
+ * Email: wyxushuai@163.com
+ */
 public class PreferencesUtils {
 	 private static SharedPreferences mPrefs;
 
