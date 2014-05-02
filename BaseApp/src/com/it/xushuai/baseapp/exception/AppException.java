@@ -22,7 +22,7 @@ import com.it.xushuai.baseapp.AppContext;
 import com.it.xushuai.baseapp.AppManager;
 import com.it.xushuai.baseproject.R;
 
-public class AppException implements UncaughtExceptionHandler{
+public class AppException extends Exception implements UncaughtExceptionHandler{
 	/**whether save log */
 	private final static boolean Debug = false;
 	
