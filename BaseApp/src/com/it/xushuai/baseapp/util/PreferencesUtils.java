@@ -1,5 +1,7 @@
 package com.it.xushuai.baseapp.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -9,9 +11,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
+import android.text.TextUtils;
 
 /**
  * https://github.com/Pixplicity/EasyPreferences
+ * https://github.com/kcochibili/TinyDB--Android-Shared-Preferences-Turbo/blob/master/TinyDB.java
+ *
  * @author xushuai
  * 2014-5-2
  * Email: wyxushuai@163.com
@@ -116,36 +121,18 @@ public class PreferencesUtils {
 	    public static String getString(final String key, final String defValue) {
 	        return getPreferences().getString(key, defValue);
 	    }
-
-
-	    /**
-	     * @param key      The name of the preference to retrieve.
-	     * @param defValue Value to return if this preference does not exist.
-	     * @return Returns the preference values if they exist, or defValues.
-	     * Throws ClassCastException if there is a preference with this name
-	     * that is not a Set.
-	     * @see android.content.SharedPreferences#getStringSet(String, java.util.Set)
-	     */
-	    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	    public static Set<String> getStringSet(final String key, final Set<String> defValue) {
-	        SharedPreferences prefs = getPreferences();
-	        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-	            return prefs.getStringSet(key, defValue);
-	        } else {
-	            if (prefs.contains(key + "#LENGTH")) {
-	                HashSet<String> set = new HashSet<String>();
-	                // Workaround for pre-HC's lack of StringSets
-	                int stringSetLength = prefs.getInt(key + "#LENGTH", -1);
-	                if (stringSetLength >= 0) {
-	                    for (int i = 0; i < stringSetLength; i++) {
-	                        prefs.getString(key + "[" + i + "]", null);
-	                    }
-	                }
-	                return set;
-	            }
-	        }
-	        return defValue;
-	    }
+	    
+	    public double getDouble(String key) {
+			String stringValue = getString(key,"");
+			try {
+			 double value = Double.parseDouble(stringValue);
+			 return value;
+			}
+			catch(NumberFormatException e)
+			{
+			  return 0;
+			}
+		}
 
 	    /**
 	     * @param key   The name of the preference to modify.
@@ -261,6 +248,112 @@ public class PreferencesUtils {
 	    }
 
 	    /**
+	     * @param key      The name of the preference to retrieve.
+	     * @param defValue Value to return if this preference does not exist.
+	     * @return Returns the preference values if they exist, or defValues.
+	     * Throws ClassCastException if there is a preference with this name
+	     * that is not a Set.
+	     * @see android.content.SharedPreferences#getStringSet(String, java.util.Set)
+	     */
+	    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	    public static Set<String> getStringSet(final String key, final Set<String> defValue) {
+	        SharedPreferences prefs = getPreferences();
+	        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+	            return prefs.getStringSet(key, defValue);
+	        } else {
+	            if (prefs.contains(key + "#LENGTH")) {
+	                HashSet<String> set = new HashSet<String>();
+	                // Workaround for pre-HC's lack of StringSets
+	                int stringSetLength = prefs.getInt(key + "#LENGTH", -1);
+	                if (stringSetLength >= 0) {
+	                    for (int i = 0; i < stringSetLength; i++) {
+	                        prefs.getString(key + "[" + i + "]", null);
+	                    }
+	                }
+	                return set;
+	            }
+	        }
+	        return defValue;
+	    }
+
+	    public void putList(String key, ArrayList<String> marray) {
+
+			SharedPreferences.Editor editor = getPreferences().edit();
+			String[] mystringlist = marray.toArray(new String[marray.size()]);
+			// the comma like character used below is not a comma it is the SINGLE
+			// LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
+			// seprating the items in the list
+			editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
+			editor.apply();
+		}
+
+		public ArrayList<String> getList(String key) {
+			// the comma like character used below is not a comma it is the SINGLE
+			// LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
+			// seprating the items in the list
+			String[] mylist = TextUtils
+					.split(getPreferences().getString(key, ""), "‚‗‚");
+			ArrayList<String> gottenlist = new ArrayList<String>(
+					Arrays.asList(mylist));
+			return gottenlist;
+		}
+
+		public void putListInt(String key, ArrayList<Integer> marray,
+				Context context) {
+			SharedPreferences.Editor editor = getPreferences().edit();
+			Integer[] mystringlist = marray.toArray(new Integer[marray.size()]);
+			// the comma like character used below is not a comma it is the SINGLE
+			// LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
+			// seprating the items in the list
+			editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
+			editor.apply();
+		}
+
+		public ArrayList<Integer> getListInt(String key,
+				Context context) {
+			// the comma like character used below is not a comma it is the SINGLE
+			// LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
+			// seprating the items in the list
+			String[] mylist = TextUtils
+					.split(getPreferences().getString(key, ""), "‚‗‚");
+			ArrayList<String> gottenlist = new ArrayList<String>(
+					Arrays.asList(mylist));
+			ArrayList<Integer> gottenlist2 = new ArrayList<Integer>();
+			for (int i = 0; i < gottenlist.size(); i++) {
+				gottenlist2.add(Integer.parseInt(gottenlist.get(i)));
+			}
+
+			return gottenlist2;
+		}
+
+		public void putListBoolean(String key, ArrayList<Boolean> marray){
+			ArrayList<String> origList = new ArrayList<String>();
+			for(Boolean b : marray){
+				if(b==true){
+					origList.add("true");
+				}else{
+					origList.add("false");
+				}
+			}
+			putList(key, origList);
+		}
+
+		public ArrayList<Boolean> getListBoolean(String key) {
+			ArrayList<String> origList = getList(key);
+			ArrayList<Boolean> mBools = new ArrayList<Boolean>();
+			for(String b : origList){
+				if(b.equals("true")){
+					mBools.add(true);
+				}else{ 
+					mBools.add(false);
+				} 
+			}
+			return mBools;
+		}
+		
+    
+	    
+	    /**
 	     * @param key The name of the preference to remove.
 	     * @see android.content.SharedPreferences.Editor#remove(String)
 	     */
@@ -286,11 +379,26 @@ public class PreferencesUtils {
 	        }
 	    }
 
-	    /**
+		/**
 	     * @param key The name of the preference to check.
 	     * @see android.content.SharedPreferences#contains(String)
 	     */
 	    public static boolean contains(final String key) {
 	        return getPreferences().contains(key);
 	    }
+	    
+	    public void clear() {
+			final Editor editor = getPreferences().edit();
+			editor.clear();
+			editor.apply();
+		}
+
+	    public void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+	    	getPreferences().registerOnSharedPreferenceChangeListener(listener);
+		}
+
+		public void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+			getPreferences().unregisterOnSharedPreferenceChangeListener(listener);
+		}
 }
+
