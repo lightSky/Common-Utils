@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.it.xushuai.baseapp.util;
+package com.it.xushuai.baseapp.common;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;

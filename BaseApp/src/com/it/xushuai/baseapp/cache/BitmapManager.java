@@ -1,4 +1,4 @@
-package com.it.xushuai.baseapp.common;
+package com.it.xushuai.baseapp.cache;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class BitmapManager {
 
 	static {
 		cache = new HashMap<String, SoftReference<Bitmap>>();
-		pool = Executors.newFixedThreadPool(5); // ¹Ì¶¨Ïß³Ì³Ø
+		pool = Executors.newFixedThreadPool(5); // ï¿½Ì¶ï¿½ï¿½ß³Ì³ï¿½
 		imageViews = Collections
 				.synchronizedMap(new WeakHashMap<ImageView, String>());
 	}
@@ -42,7 +42,7 @@ public class BitmapManager {
 	}
 
 	  /**
-     * ¼ÓÔØÍ¼Æ¬
+     * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
      * @param url
      * @param imageView
      */
@@ -51,7 +51,7 @@ public class BitmapManager {
     }
 	
     /**
-     * ¼ÓÔØÍ¼Æ¬-¿ÉÉèÖÃ¼ÓÔØÊ§°ÜºóÏÔÊ¾µÄÄ¬ÈÏÍ¼Æ¬
+     * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬-ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½Ê§ï¿½Üºï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ä¬ï¿½ï¿½Í¼Æ¬
      * @param url
      * @param imageView
      * @param defaultBmp
@@ -61,7 +61,7 @@ public class BitmapManager {
     }
     
     /**
-     * ¼ÓÔØÍ¼Æ¬-¿ÉÖ¸¶¨ÏÔÊ¾Í¼Æ¬µÄ¸ß¿í
+     * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬-ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ê¾Í¼Æ¬ï¿½Ä¸ß¿ï¿½
      * @param url
      * @param imageView
      * @param width
@@ -72,19 +72,19 @@ public class BitmapManager {
         Bitmap bitmap = getBitmapFromCache(url);  
    
         if (bitmap != null) {  
-			//ÏÔÊ¾»º´æÍ¼Æ¬
+			//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
             imageView.setImageBitmap(bitmap);  
         } else {  
-        	//¼ÓÔØSD¿¨ÖÐµÄÍ¼Æ¬»º´æ
+        	//ï¿½ï¿½ï¿½ï¿½SDï¿½ï¿½ï¿½Ðµï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
         	String filename = FileUtils.getFileName(url);
         	String filepath = imageView.getContext().getFilesDir() + File.separator + filename;
     		File file = new File(filepath);
     		if(file.exists()){
-				//ÏÔÊ¾SD¿¨ÖÐµÄÍ¼Æ¬»º´æ
+				//ï¿½ï¿½Ê¾SDï¿½ï¿½ï¿½Ðµï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
     			Bitmap bmp = ImageUtils.getBitmap(imageView.getContext(), filename);
         		imageView.setImageBitmap(bmp);
         	}else{
-				//Ïß³Ì¼ÓÔØÍøÂçÍ¼Æ¬
+				//ï¿½ß³Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
         		imageView.setImageBitmap(defaultBmp);
         		queueJob(url, imageView, width, height);
         	}
@@ -92,7 +92,7 @@ public class BitmapManager {
     }  
     
     /**
-     * ´Ó»º´æÖÐ»ñÈ¡Í¼Æ¬
+     * ï¿½Ó»ï¿½ï¿½ï¿½ï¿½Ð»ï¿½È¡Í¼Æ¬
      * @param url
      */
     public Bitmap getBitmapFromCache(String url) {  
@@ -105,7 +105,7 @@ public class BitmapManager {
     
   
 	/**
-	 * ´ÓÍøÂçÖÐ¼ÓÔØÍ¼Æ¬
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½Í¼Æ¬
 	 * 
 	 * @param url
 	 * @param imageView
@@ -122,7 +122,7 @@ public class BitmapManager {
 					if (msg.obj != null) {
 						imageView.setImageBitmap((Bitmap) msg.obj);
 						try {
-							// ÏòSD¿¨ÖÐÐ´ÈëÍ¼Æ¬»º´æ
+							// ï¿½ï¿½SDï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
 							ImageUtils.saveImage(imageView.getContext(),
 									FileUtils.getFileName(url),
 									(Bitmap) msg.obj);
@@ -144,7 +144,7 @@ public class BitmapManager {
 	}
 
 	/**
-	 * ÏÂÔØÍ¼Æ¬-¿ÉÖ¸¶¨ÏÔÊ¾Í¼Æ¬µÄ¸ß¿í
+	 * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬-ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ê¾Í¼Æ¬ï¿½Ä¸ß¿ï¿½
 	 * 
 	 * @param url
 	 * @param width
@@ -153,13 +153,13 @@ public class BitmapManager {
 	private Bitmap downloadBitmap(String url, int width, int height) {
 		Bitmap bitmap = null;
 		try {
-			// http¼ÓÔØÍ¼Æ¬
+			// httpï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 			bitmap = DownLoadPic.getNetBitmap(url);
 			if (width > 0 && height > 0) {
-				// Ö¸¶¨ÏÔÊ¾Í¼Æ¬µÄ¸ß¿í
+				// Ö¸ï¿½ï¿½ï¿½ï¿½Ê¾Í¼Æ¬ï¿½Ä¸ß¿ï¿½
 				bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
 			}
-			// ·ÅÈë»º´æ
+			// ï¿½ï¿½ï¿½ë»ºï¿½ï¿½
 			cache.put(url, new SoftReference<Bitmap>(bitmap));
 		} catch (AppException e) {
 			e.printStackTrace();

@@ -3,16 +3,13 @@ package com.it.xushuai.baseapp.util;
 import android.util.Log;
 
 /**
- * 自定义的日志类，可开关�?
+ * 自定义的日志类，可开关�?
  * 
  */
 public class Logger {
 	
 	private static final String TAG = "GroupByLog";
 	
-	/**
-	 * DEBUG 值为true 时，日志为开�?值为 false 时，日志关闭，应用发布时，应置为false.
-	 */
 	public static final boolean DEBUG = false;
 
 	public static void v(String tag, String msg) {
