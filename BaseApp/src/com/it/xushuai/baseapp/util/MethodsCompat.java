@@ -15,10 +15,7 @@ import android.view.View;
 import android.view.Window;
 
 /**
- * Android各版本的兼容方法
- * @author liux (http://my.oschina.net/liux)
- * @version 1.0
- * @created 2012-8-6
+ *  Android鍚勭増鏈殑鍏煎鏂规硶
  */
 public class MethodsCompat {
 	

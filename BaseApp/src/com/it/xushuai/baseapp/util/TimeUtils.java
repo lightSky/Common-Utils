@@ -29,7 +29,7 @@ public class TimeUtils {
 	};
 	
 	/**
-	 * ½«×Ö·û´®×ªÎªÈÕÆÚÀàĞÍ
+	 * å°†å­—ç¬¦ä¸²è½¬ä½æ—¥æœŸç±»å‹
 	 * @param sdate
 	 * @return
 	 */
@@ -42,7 +42,7 @@ public class TimeUtils {
 	}
 	
 	/**
-	 * ÒÔÓÑºÃµÄ·½Ê½ÏÔÊ¾Ê±¼ä
+	 * ä»¥å‹å¥½çš„æ–¹å¼æ˜¾ç¤ºæ—¶é—´
 	 * @param sdate
 	 * @return
 	 */
@@ -54,15 +54,15 @@ public class TimeUtils {
 		String ftime = "";
 		Calendar cal = Calendar.getInstance();
 		
-		//ÅĞ¶ÏÊÇ·ñÊÇÍ¬Ò»Ìì
+		//åˆ¤æ–­æ˜¯å¦æ˜¯åŒä¸€å¤©
 		String curDate = dateFormater2.get().format(cal.getTime());
 		String paramDate = dateFormater2.get().format(time);
 		if(curDate.equals(paramDate)){
 			int hour = (int)((cal.getTimeInMillis() - time.getTime())/3600000);
 			if(hour == 0)
-				ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000,1)+"·ÖÖÓÇ°";
+				ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000,1)+"åˆ†é’Ÿå‰";
 			else 
-				ftime = hour+"Ğ¡Ê±Ç°";
+				ftime = hour+"å°æ—¶å‰";
 			return ftime;
 		}
 		
@@ -72,18 +72,18 @@ public class TimeUtils {
 		if(days == 0){
 			int hour = (int)((cal.getTimeInMillis() - time.getTime())/3600000);
 			if(hour == 0)
-				ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000,1)+"·ÖÖÓÇ°";
+				ftime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000,1)+"åˆ†é’Ÿå‰";
 			else 
-				ftime = hour+"Ğ¡Ê±Ç°";
+				ftime = hour+"å°æ—¶å‰";
 		}
 		else if(days == 1){
-			ftime = "×òÌì";
+			ftime = "æ˜¨å¤©";
 		}
 		else if(days == 2){
-			ftime = "Ç°Ìì";
+			ftime = "å‰å¤©";
 		}
 		else if(days > 2 && days <= 10){ 
-			ftime = days+"ÌìÇ°";			
+			ftime = days+"å¤©å‰";			
 		}
 		else if(days > 10){			
 			ftime = dateFormater2.get().format(time);
@@ -92,7 +92,7 @@ public class TimeUtils {
 	}
 	
 	/**
-	 * ÅĞ¶Ï¸ø¶¨×Ö·û´®Ê±¼äÊÇ·ñÎª½ñÈÕ
+	 * åˆ¤æ–­ç»™å®šå­—ç¬¦ä¸²æ—¶é—´æ˜¯å¦ä¸ºä»Šæ—¥
 	 * @param sdate
 	 * @return boolean
 	 */

@@ -33,7 +33,6 @@ public class DownLoadPic {
 	
 	private static GetMethod getHttpGet(String url, String cookie, String userAgent) {
 		GetMethod httpGet = new GetMethod(url);
-		// ÉèÖÃ ÇëÇó³¬Ê±Ê±¼ä
 		httpGet.getParams().setSoTimeout(TIMEOUT_SOCKET);
 //		httpGet.setRequestHeader("Host", URLs.HOST);
 		httpGet.setRequestHeader("Connection","Keep-Alive");
@@ -44,21 +43,20 @@ public class DownLoadPic {
 	
 	private static HttpClient getHttpClient() {        
         HttpClient httpClient = new HttpClient();
-		// ÉèÖÃ HttpClient ½ÓÊÕ Cookie,ÓÃÓëä¯ÀÀÆ÷Ò»ÑùµÄ²ßÂÔ
+		// ï¿½ï¿½ï¿½ï¿½ HttpClient ï¿½ï¿½ï¿½ï¿½ Cookie,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
 		httpClient.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
-        // ÉèÖÃ Ä¬ÈÏµÄ³¬Ê±ÖØÊÔ´¦Àí²ßÂÔ
+        // ï¿½ï¿½ï¿½ï¿½ Ä¬ï¿½ÏµÄ³ï¿½Ê±ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		httpClient.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
-		// ÉèÖÃ Á¬½Ó³¬Ê±Ê±¼ä
+		// ï¿½ï¿½ï¿½ï¿½ lï¿½Ó³ï¿½Ê±Ê±ï¿½ï¿½
 		httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(TIMEOUT_CONNECTION);
-		// ÉèÖÃ ¶ÁÊı¾İ³¬Ê±Ê±¼ä 
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½İ³ï¿½Ê±Ê±ï¿½ï¿½ 
 		httpClient.getHttpConnectionManager().getParams().setSoTimeout(TIMEOUT_SOCKET);
-		// ÉèÖÃ ×Ö·û¼¯
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ö·ï¿½
 		httpClient.getParams().setContentCharset(UTF_8);
 		return httpClient;
 	}	
 	
 	/**
-	 * »ñÈ¡ÍøÂçÍ¼Æ¬
 	 * @param url
 	 * @return
 	 */
@@ -89,7 +87,6 @@ public class DownLoadPic {
 					} catch (InterruptedException e1) {} 
 					continue;
 				}
-				// ·¢ÉúÖÂÃüµÄÒì³££¬¿ÉÄÜÊÇĞ­Òé²»¶Ô»òÕß·µ»ØµÄÄÚÈİÓĞÎÊÌâ
 				e.printStackTrace();
 				throw AppException.http(e);
 			} catch (IOException e) {
@@ -100,11 +97,9 @@ public class DownLoadPic {
 					} catch (InterruptedException e1) {} 
 					continue;
 				}
-				// ·¢ÉúÍøÂçÒì³£
 				e.printStackTrace();
 				throw AppException.network(e);
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
 				httpGet.releaseConnection();
 				httpClient = null;
 			}

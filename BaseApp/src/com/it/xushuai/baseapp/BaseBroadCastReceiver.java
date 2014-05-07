@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 public class BaseBroadCastReceiver extends BroadcastReceiver{
 
 	/**
-	 * 网络状态变更的广播
 	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {

@@ -40,7 +40,6 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 	/**Exception Code*/
 	private int code;
 	
-	/**ÏµÍ³Ä¬ÈÏµÄunCaughtException ´¦ÀíÀà*/
 	private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 	
 	private AppException(){
@@ -89,7 +88,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 	}
 	
 	/**
-	 * IO Exception £º includes Http¡¢IO¡¢Runtime Exception
+	 * IOå¼‚å¸¸
 	 * @param e
 	 * @return
 	 */
@@ -104,7 +103,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 	}
 	
 	/**
-	 * newwork Exception: includes Http¡¢IO¡¢Socket Exception
+	 * ç½‘ç»œå¼‚å¸¸
 	 * @param e
 	 * @return
 	 */
@@ -126,7 +125,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 	}
 	
 	/**
-	 * ÌáÊ¾ÓÑºÃµÄ´íÎóĞÅÏ¢
+	 * æç¤ºå‹å¥½çš„é”™è¯¯ä¿¡æ¯
 	 * @param ctx
 	 */
 	public void makeToast(Context ctx){
@@ -157,7 +156,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 	}
 	
 	/**
-	 * »ñÈ¡APPÒì³£±ÀÀ£´¦Àí¶ÔÏó
+	 * è·å–APPå¼‚å¸¸å´©æºƒå¤„ç†å¯¹è±¡
 	 * @param context
 	 * @return
 	 */
@@ -178,11 +177,10 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 		if(context == null)
 			return false;
 		String crashReport = getCrashReport(context,ex);
-		//·¢ËÍ´íÎó±¨¸æµ½·şÎñÆ÷
 		new Thread(){
 			public void run() {
 				Looper.prepare();
-				//UIHelper.sendAppCrashReport(context, crashReport); //Òì²½´¦Àí
+				//UIHelper.sendAppCrashReport(context, crashReport); //ï¿½ì²½ï¿½ï¿½ï¿½ï¿½
 				Looper.loop();
 			};
 		}.start();
@@ -190,7 +188,6 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 	}
 	
 	/**
-	 * »ñÈ¡APP±ÀÀ£Òì³£±¨¸æ
 	 * @param ex
 	 * @return
 	 */
@@ -208,7 +205,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 	}
 	
 	/**
-	 * ±£´æ´íÎóÈÕÖ¾
+	 * ä¿å­˜å¼‚å¸¸æ—¥å¿—
 	 * @param excp
 	 */
 	private void saveErrorLog(Exception excp) {
@@ -227,6 +224,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler{
 						dir.mkdirs();
 						logFilePath = savePath + errorLog;
 					}
+					//æ²¡æœ‰æŒ‚è½½SDå¡ï¼Œæ— æ³•å†™æ–‡ä»¶
 					if(logFilePath == ""){
 						return;
 					}

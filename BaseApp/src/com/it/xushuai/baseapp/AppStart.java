@@ -20,7 +20,6 @@ public class AppStart extends Activity {
 //		final View view = View.inflate(this, R.layout.start, null);
 //		setContentView(view);
 //
-//		// 渐变展示启动屏
 //		AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
 //		aa.setDuration(2000);
 //		view.startAnimation(aa);
@@ -43,7 +42,6 @@ public class AppStart extends Activity {
 	}
 
 	/**
-	 * 跳转到...
 	 */
 	private void redirectTo() {
 		// Intent intent = new Intent(this, Main.class);
