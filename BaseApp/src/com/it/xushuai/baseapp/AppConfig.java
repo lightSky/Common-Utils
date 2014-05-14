@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 
 public class AppConfig {
 	
+	public final static boolean DEBUG = true;
 	private static AppConfig appConfig;
 	private Context mContext;
 	public final static String CONF_APP_UNIQUEID = "APP_UNIQUEID";
