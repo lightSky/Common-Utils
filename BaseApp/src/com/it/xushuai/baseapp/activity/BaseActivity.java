@@ -1,5 +1,7 @@
 package com.it.xushuai.baseapp.activity;
 
+import java.io.Serializable;
+
 import com.it.xushuai.baseapp.AppManager;
 import com.mobclick.android.MobclickAgent;
 
@@ -33,6 +35,27 @@ public abstract class BaseActivity extends Activity {
 		super.onDestroy();
 		appManager.finishActivity(this);
 	}
+	
+	/**
+     * Get serializable extra from activity's intent
+     *
+     * @param name
+     * @return extra
+     */
+    @SuppressWarnings("unchecked")
+    protected <V extends Serializable> V getSerializableExtra(final String name) {
+            return (V)getIntent().getSerializableExtra(name);
+    }
+
+    /**
+     * Get string extra from activity's intent
+     *
+     * @param name
+     * @return extra
+     */
+    protected String getStringExtra(final String name) {
+            return getIntent().getStringExtra(name);
+    }
 	
 	protected abstract void initViews();
 	protected abstract void initEvents();
