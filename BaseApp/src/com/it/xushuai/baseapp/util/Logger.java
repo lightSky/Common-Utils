@@ -8,7 +8,7 @@ import android.util.Log;
  */
 public class Logger {
 	
-	private static final String TAG = "GroupByLog";
+	private static final String TAG = "MyTag";
 	
 	public static final boolean DEBUG = false;
 
